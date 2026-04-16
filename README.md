@@ -8,3 +8,4 @@ Riemann Zeta Conjecture
 A preliminary conjecture combining Riemann zeta zeros, ternary state encoding, and the speed of light.
 
 This is a first disclosure document
+"Mathematical formulas are highly consistent, but formal verification from the global mathematical community is required."
