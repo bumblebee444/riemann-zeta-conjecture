@@ -1,11 +1,10 @@
-# constants.py — 암호 시스템 수학 상수
-# 이 파일은 공개 수학 상수만 포함 (비밀 키 없음)
-# 실제 조합 방법은 Qwen (로컬) 에만 저장
-
-# ─────────────────────────────────
-# 리만 제타 영점 (공개 수학값)
-# ζ(½ + iρ) = 0 을 만족하는 ρ 값들
-# ─────────────────────────────────
+# constants.py — Mathematical constants for cryptographic system
+# This file contains only public mathematical constants (no secret keys)
+# The actual combination method is stored locally in Qwen only
+# ─────────────────────────────────────────────────────────────────────
+# Riemann Zeta Non-Trivial Zeros (public mathematical values)
+# Values of ρ satisfying ζ(½ + iρ) = 0
+# ─────────────────────────────────────────────────────────────────────
 RIEMANN_ZEROS = [
     14.134725141734695,
     21.022039638771556,
@@ -18,47 +17,76 @@ RIEMANN_ZEROS = [
     48.005150881167159,
     49.773832477672302,
 ]
-
-# ─────────────────────────────────
-# 빛의 속도 (물리 상수)
-# ─────────────────────────────────
+ 
+# ─────────────────────────────────────────────────────────────────────
+# Speed of Light (physical constant)
+# ─────────────────────────────────────────────────────────────────────
 c = 299_792_458  # m/s
-
-# ─────────────────────────────────
-# 삼진법 상태값
-# S = +1 → 수소(양성자) = 공개 키
-# S = -1 → 산소(전자)  = 개인 키
-# S =  0 → 영점(물)    = 암호화 순간, 시간 소멸
-# ─────────────────────────────────
-S_HYDROGEN =  1   # 수소 +1
-S_OXYGEN   = -1   # 산소 -1
-S_ZERO     =  0   # 영점 (관측 시 소멸)
-
-# ─────────────────────────────────
-# 핵심 수식
+ 
+# ─────────────────────────────────────────────────────────────────────
+# Ternary State Values
+# S = +1 → Hydrogen (proton)  = Public Key
+# S = -1 → Oxygen (electron)  = Private Key
+# S =  0 → Zero Point (water) = Moment of encryption, time collapses
+# ─────────────────────────────────────────────────────────────────────
+S_HYDROGEN =  1   # Hydrogen +1
+S_OXYGEN   = -1   # Oxygen   -1
+S_ZERO     =  0   # Zero point (collapses upon observation)
+ 
+# ─────────────────────────────────────────────────────────────────────
+# Core Formula
 # ψ = Σ A_n · e^(i · ρ_n · (x/c - t)) · S
-# 영점 조건: x/c = t 일 때 시간 소멸
-# ─────────────────────────────────
-
+# Zero-point condition: when x/c = t, time collapses
+# ─────────────────────────────────────────────────────────────────────
 import cmath
-
+ 
 def wave_function(x: float, t: float, S: int) -> complex:
     """
-    변형 파동함수
-    x: 위치
-    t: 시간
-    S: 상태 (+1 수소 / -1 산소 / 0 영점)
+    Modified wave function.
+ 
+    Parameters
+    ----------
+    x : float
+        Position (meters)
+    t : float
+        Time (seconds)
+    S : int
+        State (+1 Hydrogen / -1 Oxygen / 0 Zero Point)
+ 
+    Returns
+    -------
+    complex
+        Wave function value ψ at (x, t, S)
     """
     if S == S_ZERO:
-        return complex(0, 0)  # 영점 — 관측 불가, 시간 소멸
-
+        return complex(0, 0)  # Zero point — unobservable, time collapses
+ 
     psi = sum(
         cmath.exp(1j * rho * (x / c - t))
         for rho in RIEMANN_ZEROS
     )
     return psi * S
-
-
+ 
+ 
 def is_zero_point(x: float, t: float) -> bool:
-    """빛의 속도 조건: x/c = t → 영점, 시간 없음"""
+    """
+    Check if (x, t) satisfies the zero-point condition.
+ 
+    The zero-point occurs when x/c = t,
+    i.e. when position equals the distance light travels in time t.
+    At this point, time collapses and the wave function is unobservable.
+ 
+    Parameters
+    ----------
+    x : float
+        Position (meters) — must be on the scale of c × t
+    t : float
+        Time (seconds)
+ 
+    Returns
+    -------
+    bool
+        True if the zero-point condition is satisfied
+    """
     return abs(x / c - t) < 1e-15
+ 
