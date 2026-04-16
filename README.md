@@ -1,9 +1,10 @@
 Riemann Zeta Conjecture
 
-Author: bumblebee444
-Date: April 15, 2026
+**Author:** bumblebee444  
+**Date:** April 15, 2026
 
-A preliminary conjecture combining Riemann zeta zeros,
-ternary state encoding, and the speed of light.
+> ***What if the key to breaking modern encryption has been hiding in the zeros of the Riemann Zeta Function all along?***
 
-This is a first disclosure document,
+A preliminary conjecture combining Riemann zeta zeros, ternary state encoding, and the speed of light.
+
+This is a first disclosure document, not a completed proof.
